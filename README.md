@@ -105,10 +105,10 @@ server_id = 111111  #服务器ID，唯一标识，可以用资产编号
 game_id = 31  #业务ID，从Dashboard的业务管理中获取
 op_id = 1 #保留字段，随便填
 interval = 3600 #设定备份间隔时间
-redis_host = 0.0.0.0 #服务端redis地址
+redis_host = 172.16.1.14 #服务端redis地址
 redis_port = 6379 #服务端redis端口
 redis_queue = uuzuback #服务端redis队列名称
-my_ip = 127.0.0.0.1 #本机IP
+my_ip = 127.0.0.1 #本机IP
 log = /var/log/uuzu_back.log #日志路径
 error_log = /var/log/uuzu_back.error #错误日志路径
 
@@ -116,18 +116,18 @@ error_log = /var/log/uuzu_back.error #错误日志路径
 back_type = mysql  #备份类型
 instance = 3306 #实例号，数据库类的备份可以用端口号表示
 rsync_model = backup/database_3306 #rsync模块名称
-back_dir = /data/backup/database_3306/ #备份文件路径
+back_dir = /home/ubackup/client/data/database_3306/ #备份文件路径
 back_log = /var/log/mysql_3306.log #备份信息路径
 last_all_log = /var/log/last_3306.log #上一次全备路径，如果不区分全备增量，此配置可以省略
-script = sh /usr/local/uuzuback/mysql_backup.sh /etc/my.cnf #备份脚本
+script = sh /home/ubackup/shell/mysql_backup.sh /etc/my.cnf #备份脚本
 
 [redis6379]
 back_type = redis
 instance = 6379
 rsync_model = backup/redisbase_6379
-back_dir = /data/backup/redisbase_6379/
+back_dir = /home/ubackup/data/redisbase_6379/
 back_log = /var/log/redis_6379.log
-script = sh /usr/local/uuzuback/redis_backup.sh /data/conf/redis_conf
+script = sh /home/ubackup/shell/redis_backup.sh /etc/redis_conf
 ```
 
 把python uuzuback_client.py 加入crontab，cron的间隔时间和配置文件中的interval保持一致
