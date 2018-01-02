@@ -136,7 +136,7 @@ script = sh /usr/local/uuzuback/redis_backup.sh /data/conf/redis_conf
 ### 服务端:
 安装依赖
 ```
-yum install supervisor MySQL-python -y
+yum install supervisor MySQL-python patch -y
 pip install redis
 cd ubackup/server/
 cp uuzuback.conf /etc/
