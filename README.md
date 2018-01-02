@@ -136,7 +136,7 @@ script = sh /usr/local/uuzuback/redis_backup.sh /data/conf/redis_conf
 ### 服务端:
 安装依赖
 ```
-yum install supervisor MySQL-python patch -y
+yum install supervisor MySQL-python -y
 pip install redis
 cd ubackup/server/
 cp uuzuback.conf /etc/
@@ -186,13 +186,16 @@ stdout_logfile=/var/log/uuzu_backup_to_es.log
 ```
 
 ### Dashboard:
+yum install patch   -y   #解决readline.o等的错误
 ```
 cd ubackup/dashboard
 pip install -r requirements.txt
 ```
 
 修改config.py，配置好数据库连接串,执行
-
+mysql>grant all privileges on *.* to 'ubackup'@'127.0.0.1' identified by "ubackup";
+mysql>flush privileges;
+mysql>create database ubackup default character set utf8;
 ```
 python -c 'from myapp import db;db.create_all()'
 ```
@@ -201,7 +204,7 @@ python -c 'from myapp import db;db.create_all()'
 python runserver.py
 ```
 访问5000端口即可
-
+默认登录名和密码都是admin
 ### 节点信息上报:
 
 队列信息上报
