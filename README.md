@@ -187,6 +187,9 @@ stdout_logfile=/var/log/uuzu_backup_to_es.log
 
 ### Dashboard:
 yum install patch   -y   #解决readline.o等的错误
+解决python 2.7安装 pip install public 的报错
+	cat  ubackup/dashboard/patch-Lib-distutils-command-build_py
+	vim /usr/lib64/python2.7/distutils/command/build_py.py
 ```
 cd ubackup/dashboard
 pip install -r requirements.txt
